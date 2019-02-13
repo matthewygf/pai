@@ -10,5 +10,6 @@
           "path": "/usr/bin/nvidia-container-runtime",
           "runtimeArgs": []
       }
-  }
+  }，
+  "live-restore": true
 }
