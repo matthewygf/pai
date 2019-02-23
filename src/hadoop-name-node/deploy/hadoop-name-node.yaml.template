@@ -60,7 +60,8 @@ spec:
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
           limits:
-            memory: "8Gi"
+            # memory: "8Gi" i am poor :(
+            memory: "2Gi"
         {%- endif %}
       imagePullSecrets:
       - name: {{ cluster_cfg["cluster"]["docker-registry"]["secret-name"] }}

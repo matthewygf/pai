@@ -76,7 +76,8 @@ spec:
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
           limits:
-            memory: "4Gi"
+            # memory: "4Gi" i am so poor :(
+            memory: "2Gi"
         {%- endif %}
         env:
         - name: RESOURCEMANAGER_ADDRESS

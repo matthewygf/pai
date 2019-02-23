@@ -32,6 +32,8 @@ spec:
         prometheus.io/path: '/metrics'
         prometheus.io/port: '{{ cluster_cfg[ "hadoop-resource-manager" ]["yarn_exporter_port"] }}'
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: {{ cluster_cfg['kubernetes']['resource-manager'] }}
       hostAliases:
       - ip: "{{ cluster_cfg[ "hadoop-resource-manager" ][ "master-ip" ] }}"
         hostnames:
@@ -79,9 +81,11 @@ spec:
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
           limits:
-            memory: "36Gi"
-          requests:
+            #memory: "36Gi" i am poor :(
             memory: "8Gi"
+          requests:
+            # memory: "8Gi" poor x2
+            memory: "4Gi"
         {%- endif %}
       - name: yarn-exporter
         image: {{ cluster_cfg["cluster"]["docker-registry"]["prefix"] }}yarn-exporter:{{ cluster_cfg["cluster"]["docker-registry"]["tag"] }}

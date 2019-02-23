@@ -89,6 +89,9 @@ class paiObjectModel:
             if "dashboard" in host:
                 k8sDict["clusterinfo"]["dashboard-host"] = host["hostip"]
 
+            if "resourcemanger" in host:
+                k8sDict["clusterinfo"]["resource-manager"] = host["hostip"]
+
             if host["k8s-role"] == "master":
 
                 masterDict[host["hostname"]] = host

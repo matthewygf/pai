@@ -27,6 +27,7 @@ class HadoopResourceManager:
 
         self.cluster_configuration = cluster_configuration
         self.service_configuration = self.merge_service_configuration(service_configuration, default_service_configuraiton)
+        self.rm_machine = 0
 
     def merge_service_configuration(self, overwrite_srv_cfg, default_srv_cfg):
         if overwrite_srv_cfg == None:
@@ -37,11 +38,24 @@ class HadoopResourceManager:
         return srv_cfg
 
     def validation_pre(self):
-        for host_config in self.cluster_configuration["machine-list"]:
-            if "pai-master" in host_config and host_config["pai-master"] == "true":
-                break
-        else:
-            return False, "No master node found in machine list"
+        valid_tag = False
+        # 1. first check if we have labeled
+        for i, host_config in enumerate(self.cluster_configuration["machine-list"]):
+            if "resourcemanager" in host_config and host_config["resourcemanager"] == "true":
+                valid_tag = True
+                self.rm_machine = i
+
+        # 2. check whether we have pai-master
+        if not valid_tag:
+            # make sure we have pai-master
+            for i, host_config in enumerate(self.cluster_configuration["machine-list"]):
+                if "pai-master" in host_config and host_config["pai-master"] == "true":
+                    valid_tag = True
+                    self.rm_machine = i
+                    break
+
+        if not valid_tag:
+            return False, "no node master or node labeled with resourcemanager found"
 
         total_capacity = 0
         virtual_clusters_config = self.service_configuration["virtualClusters"]
@@ -60,10 +74,10 @@ class HadoopResourceManager:
 
         com["yarn_exporter_port"] = self.service_configuration["yarn_exporter_port"]
 
-        for host_config in self.cluster_configuration["machine-list"]:
-            if "pai-master" in host_config and host_config["pai-master"] == "true":
-                com["master-ip"] = host_config["hostip"]
-                break
+        #for host_config in self.cluster_configuration["machine-list"]:
+        #    if "pai-master" in host_config and host_config["pai-master"] == "true":
+        com["master-ip"] = self.cluster_configuration["machine-list"][self.rm_machine]["hostip"]
+        #        break
 
         virtual_clusters_config = self.service_configuration["virtualClusters"]
 
