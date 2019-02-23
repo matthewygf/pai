@@ -44,6 +44,7 @@ class HadoopResourceManager:
             if "resourcemanager" in host_config and host_config["resourcemanager"] == "true":
                 valid_tag = True
                 self.rm_machine = i
+                break
 
         # 2. check whether we have pai-master
         if not valid_tag:
