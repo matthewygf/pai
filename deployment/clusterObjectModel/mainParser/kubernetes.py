@@ -79,10 +79,6 @@ class Kubernetes:
             if "resourcemanager" in host and host["resourcemanager"] == "true":
                 hostip = host["hostip"]
                 break
-        if hostip == "":
-            print("no machine labeled with resourcemanager = true")
-            sys.exit(1)
-
         return hostip
 
     def run(self):
@@ -104,7 +100,12 @@ class Kubernetes:
         com_kubernetes["kube-controller-manager-version"] = k8s_cfg["kube-controller-manager-version"]
         com_kubernetes["dashboard-version"] = k8s_cfg["dashboard-version"]
         com_kubernetes["dashboard-host"] = self.get_k8s_dashboard_node_ip()
-        com_kubernetes["resource-manager"] = self.get_resource_manager_node_ip()
+        
+        resource_manger_ip = self.get_resource_manager_node_ip()
+        if resource_manger_ip != "":
+            com_kubernetes["resource-manager"] = resource_manger_ip
+            com_kubernetes["has-rm-labeled"] = "true"
+
         if "etcd-data-path" not in k8s_cfg:
             com_kubernetes["etcd-data-path"] = "/var/etcd/data"
         else:

@@ -91,7 +91,8 @@ class paiObjectModel:
 
             if "resourcemanger" in host:
                 k8sDict["clusterinfo"]["resource-manager"] = host["hostip"]
-
+                k8sDict["clusterinfo"]["has-rm-labeled"] = "true"
+                
             if host["k8s-role"] == "master":
 
                 masterDict[host["hostname"]] = host
