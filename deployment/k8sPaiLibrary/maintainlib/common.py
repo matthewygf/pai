@@ -177,8 +177,16 @@ def sftp_paramiko(src, dst, filename, host_config):
     if ipv4_address_validation(hostip) == False:
         return False
 
+    if 'password' not in host_config and 'keyfile-path' not in host_config:
+        logger.error("At least, you should config a password or ssh key file path for a node.")
+        logger.error(
+            "Both password and ssh key file path are missing in the node [ {0} ].".format(host_config['hostip']))
+        return False
+
     username = str(host_config['username'])
-    password = str(host_config['password'])
+    password = None
+    if 'password' in host_config:
+        password = str(host_config['password'])
     port = 22
     if 'sshport' in host_config:
         if port_validation(host_config['sshport']) == False:
