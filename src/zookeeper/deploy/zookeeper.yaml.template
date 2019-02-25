@@ -56,9 +56,9 @@ spec:
           value: "-server -Xmx8192m"
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
+          # i am poor :( was 10Gi"
           limits:
-            #i am poor :( memory: "10Gi"
-            memory:"2Gi"
+            memory: "2Gi"
             cpu: "1000m"
           requests:
             memory: "1Gi"
