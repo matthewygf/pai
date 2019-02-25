@@ -319,7 +319,7 @@ def ssh_shell_with_password_input_paramiko(host_config, commandline):
     ssh.connect(hostname=hostip, port=port, key_filename=key_filename, username=username, password=password)
     stdin, stdout, stderr = ssh.exec_command(commandline, get_pty=True)
     password = password if password is not None else ''
-    stdin.write(password + '\n')
+    stdin.write( password + '\n')
     stdin.flush()
     logger.info("Executing the command on host [{0}]: {1}".format(hostip, commandline))
     for response_msg in stdout:
