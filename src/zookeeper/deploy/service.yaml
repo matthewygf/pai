@@ -29,4 +29,4 @@ refresh-script: refresh.sh
 upgraded-script: upgraded.sh
 
 deploy-rules:
-  - notin: pai-master
+  - in: pai-master

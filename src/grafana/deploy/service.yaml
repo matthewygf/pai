@@ -35,6 +35,5 @@ delete-script: delete.sh
 refresh-script: refresh.sh
 upgraded-script: upgraded.sh
 
-# i am poor :(
-#deploy-rules:
-#  - in: pai-master
+deploy-rules:
+  - in: pai-master

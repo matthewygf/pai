@@ -35,4 +35,4 @@ upgraded-script: upgraded.sh
 
 
 deploy-rules:
-  - in: resourcemanager
+  - in: pai-master

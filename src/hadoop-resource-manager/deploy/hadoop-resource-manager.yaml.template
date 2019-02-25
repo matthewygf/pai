@@ -32,10 +32,6 @@ spec:
         prometheus.io/path: '/metrics'
         prometheus.io/port: '{{ cluster_cfg[ "hadoop-resource-manager" ]["yarn_exporter_port"] }}'
     spec:
-      {%- if cluster_cfg['kubernetes']['has-rm-labeled'] == "true" %}
-      nodeSelector:
-        kubernetes.io/hostname: {{ cluster_cfg['kubernetes']['resource-manager'] }}
-      {%- endif %}
       hostAliases:
       - ip: "{{ cluster_cfg[ "hadoop-resource-manager" ][ "master-ip" ] }}"
         hostnames:

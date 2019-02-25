@@ -30,7 +30,7 @@ class HadoopNameNode:
 
     def validation_pre(self):
         for host_config in self.cluster_configuration["machine-list"]:
-            if "pai-master" in host_config and host_config["pai-master"] == "true":
+            if "name-node" in host_config and host_config["name-node"] == "true":
                 return True, None
 
         return False, "No master node found in machine list"
@@ -41,7 +41,7 @@ class HadoopNameNode:
         com = {"master-ip": None}
 
         for host_config in self.cluster_configuration["machine-list"]:
-            if "pai-master" in host_config and host_config["pai-master"] == "true":
+            if "name-node" in host_config and host_config["name-node"] == "true":
                 com["master-ip"] = host_config["hostip"]
                 break
 

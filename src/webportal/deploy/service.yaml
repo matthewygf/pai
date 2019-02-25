@@ -30,4 +30,4 @@ upgraded-script: upgraded.sh
 
 
 deploy-rules:
-  - in: pai-worker
+  - in: pai-master
