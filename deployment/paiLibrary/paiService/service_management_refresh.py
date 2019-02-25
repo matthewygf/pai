@@ -69,7 +69,7 @@ class service_management_refresh:
         self.logger.info("Begin to refresh all the nodes' labels")
         machinelist = self.cluster_object_model['machine']['machine-list']
         
-        labels = ['pai-master', 'pai-worker', 'no-driver', 'no-nodeexporter']
+        labels = ['pai-master', 'pai-worker', 'no-driver', 'no-nodeexporter', 'no-jobexporter']
         logging.info("Currently supported labels: " + str(labels))
         for label in labels:
             self.label_map[label] = list()
