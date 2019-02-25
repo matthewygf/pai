@@ -57,10 +57,9 @@ spec:
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
           limits:
-            #memory: "10Gi"
-            # i am poor :(
+            #i am poor :( memory: "10Gi"
             memory:"2Gi"
-            #cpu: "1000m"
+            cpu: "1000m"
           requests:
             memory: "1Gi"
         {%- endif %}
