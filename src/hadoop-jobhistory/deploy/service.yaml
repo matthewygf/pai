@@ -36,4 +36,4 @@ upgraded-script: upgraded.sh
 
 
 deploy-rules:
-  - in: pai-master
+  - notin: pai-master

@@ -27,4 +27,4 @@ delete-script: delete.sh
 refresh-script: refresh.sh
 
 deploy-rules:
-  - in: pai-master
+  - in: pai-worker
