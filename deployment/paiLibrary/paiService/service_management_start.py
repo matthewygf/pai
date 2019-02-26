@@ -97,7 +97,6 @@ class serivce_management_start:
                 self.logger.info("Begin to generate service {0}'s template file".format(serv))
                 service_template_generater = service_template_generate.service_template_generate(self.cluster_object_model, serv, service_conf)
                 service_template_generater.run()
-                """
                 self.logger.info("Begin to start service: [ {0} ]".format(serv))
                 service_starter.run()
 
@@ -108,7 +107,6 @@ class serivce_management_start:
                 self.logger.info("Successfully start {0}".format(serv))
                 self.logger.info("-----------------------------------------------------------")
                 break
-                """
 
             except subprocess.CalledProcessError:
                 self.logger.error("Failed to start service {0}".format(serv))
