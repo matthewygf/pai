@@ -77,7 +77,7 @@ spec:
         resources:
           limits:
             # memory: "4Gi" i am so poor :(
-            memory: "2Gi"
+            memory: "1Gi"
         {%- endif %}
         env:
         - name: RESOURCEMANAGER_ADDRESS
@@ -101,7 +101,8 @@ spec:
         - name: CURRENT_IMAGE_NAME
           value: {{ cluster_cfg["cluster"]["docker-registry"]["prefix"] }}hadoop-run:{{ cluster_cfg["cluster"]["docker-registry"]["tag"] }}
         - name: YARN_NODEMANAGER_HEAPSIZE
-          value: "3072"
+          # value: "3072" i am so poor :(
+          value: "1028"
         - name: NV_DRIVER
           value: /var/drivers/nvidia/current
       imagePullSecrets:
