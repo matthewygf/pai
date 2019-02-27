@@ -66,13 +66,11 @@ spec:
         #        You will need increase the resource in order to run more jobs.
         # well i dont need 60k jobs anyway :')
         - name: LAUNCHER_OPTS
-          value: "-server -Xmx2048m -Djute.maxbuffer=49107800"
+          value: "-server -Xmx2048m -Djute.maxbuffer=20107800"
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
           limits:
-            # i am poor :( 
-            #memory: "4Gi"
-            memory:"2Gi"
+            memory: "2Gi"
           requests:
             memory: "1Gi"
         {%- endif %}
