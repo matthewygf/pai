@@ -224,7 +224,7 @@ class paiObjectModel:
             self.rawData["serviceConfiguration"]["frameworklauncher"]
         serviceDict["clusterinfo"]["frameworklauncher"]["frameworklauncher_port"] = \
             serviceDict["clusterinfo"]["frameworklauncher"]["frameworklauncher-port"]
-        serviceDict["clusterinfo"]["frameworklauncher"]["frameworklauncher_vip"] = self.getMasterIP()
+        serviceDict["clusterinfo"]["frameworklauncher"]["frameworklauncher_vip"] = self.getIP("frameworklauncher")
 
         # section : restserverinfo
 
@@ -445,7 +445,7 @@ class paiObjectModel:
 
     def getWebServiceUri(self):
 
-        vip = self.getMasterIP()
+        vip = self.getIP("frameworklauncher")
         port = self.rawData["serviceConfiguration"]["frameworklauncher"]["frameworklauncher_port"]
         ret = "http://{0}:{1}".format(vip, str(port))
         return ret

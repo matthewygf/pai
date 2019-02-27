@@ -64,8 +64,9 @@ spec:
           value: "{{ cluster_cfg[ 'yarn-frameworklauncher' ][ 'frameworklauncher-port' ] }}"
         # Notes: default config '-Xmx3072m, memory limits: "4Gi"' could support about 60k jobs.
         #        You will need increase the resource in order to run more jobs.
+        # well i dont need 60k jobs anyway :')
         - name: LAUNCHER_OPTS
-          value: "-server -Xmx3072m -Djute.maxbuffer=49107800"
+          value: "-server -Xmx2048m -Djute.maxbuffer=49107800"
         {%- if cluster_cfg['cluster']['common']['qos-switch'] == "true" %}
         resources:
           limits:
