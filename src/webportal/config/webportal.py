@@ -31,8 +31,8 @@ class Webportal:
     #### Fist check, ensure all the configured data in cluster_configuration, service_configuration, default_service_configuration is right. And nothing is miss.
     def validation_pre(self):
         machine_list = self.cluster_configuration['machine-list']
-        if len([host for host in machine_list if host.get('pai-master') == 'true']) != 1:
-            return False, '1 and only 1 "pai-master=true" machine is required to deploy the rest server'
+        if len([host for host in machine_list if host.get('webportal') == 'true']) != 1:
+            return False, '1 and only 1 "webportal=true" machine is required to deploy the rest server'
 
         return True, None
     
@@ -41,7 +41,7 @@ class Webportal:
         # parse your service object model here, and return a generated dictionary
 
         machine_list = self.cluster_configuration['machine-list']
-        master_ip = [host['hostip'] for host in machine_list if host.get('pai-master') == 'true'][0]
+        master_ip = [host['hostip'] for host in machine_list if host.get('webportal') == 'true'][0]
         server_port = self.service_configuration['server-port']
         uri = 'http://{0}:{1}'.format(master_ip, server_port)
         plugins = self.service_configuration['plugins']

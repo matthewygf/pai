@@ -9,5 +9,7 @@ LABELS = [
     'grafana', 
     'prometheus',
     'frameworklauncher',
-    'watchdog'
+    'watchdog',
+    'restserver',
+    'webportal'
 ]

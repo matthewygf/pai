@@ -363,7 +363,7 @@ class paiObjectModel:
 
     def getPaiWebPortalUri(self):
 
-        ip = self.getMasterIP()
+        ip = self.getIP("webportal")
         port = self.rawData["serviceConfiguration"]["webportal"]["server-port"]
         ret = "http://{0}:{1}".format(ip, port)
         return ret
@@ -417,7 +417,7 @@ class paiObjectModel:
 
     def getRestServerUri(self):
 
-        vip = self.getMasterIP()
+        vip = self.getIP("restserver")
         port = self.rawData["serviceConfiguration"]["restserver"]["server-port"]
         ret = "http://{0}:{1}".format(vip, str(port))
         return ret

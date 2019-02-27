@@ -32,8 +32,8 @@ class RestServer:
         machine_list = self.cluster_configuration['machine-list']
         if all(host.get('k8s-role') != 'master' for host in machine_list):
             return False, 'At least 1 "k8s-role=master" labeled machine is required to deploy the etcd'
-        if len([host for host in machine_list if host.get('pai-master') == 'true']) != 1:
-            return False, '1 and only 1 "pai-master=true" machine is required to deploy the rest server'
+        if len([host for host in machine_list if host.get('restserver') == 'true']) != 1:
+            return False, '1 and only 1 "restserver=true" machine is required to deploy the rest server'
 
         return True, None
     
@@ -42,7 +42,7 @@ class RestServer:
         # parse your service object model here, and return a generated dictionary
 
         machine_list = self.cluster_configuration['machine-list']
-        master_ip = [host['hostip'] for host in machine_list if host.get('pai-master') == 'true'][0]
+        master_ip = [host['hostip'] for host in machine_list if host.get('restserver') == 'true'][0]
         server_port = self.service_configuration['server-port']
         
         service_object_model = dict()
