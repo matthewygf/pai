@@ -8,5 +8,6 @@ LABELS = [
     'data-node',
     'grafana', 
     'prometheus',
-    'frameworklauncher'
+    'frameworklauncher',
+    'watchdog'
 ]
