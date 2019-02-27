@@ -44,8 +44,8 @@ for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
 done
 
 # The maximum amount of heap to use, in MB. Default is 1000.
-export HADOOP_HEAPSIZE="4096"
-export HADOOP_NAMENODE_INIT_HEAPSIZE="4096"
+export HADOOP_HEAPSIZE="2048"
+export HADOOP_NAMENODE_INIT_HEAPSIZE="2048"
 
 # Extra Java runtime options.  Empty by default.
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
@@ -53,7 +53,7 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
 # Command specific options appended to HADOOP_OPTS when specified
 
 # Add more heap for name node usage, with min at 4GB and max at 16GB
-export HADOOP_NAMENODE_OPTS="-Xms4096m -Xmx16384m $HADOOP_NAMENODE_OPTS"
+export HADOOP_NAMENODE_OPTS="-Xms2048m -Xmx4096m $HADOOP_NAMENODE_OPTS"
 
 # Add more horsepower to GC in namenode. Should we use -XX:+UseG1GC?
 export HADOOP_NAMENODE_OPTS="-XX:ParallelGCThreads=16 -XX:ConcGCThreads=8 -XX:+UseConcMarkSweepGC -XX:PermSize=128m -XX:MaxPermSize=512m -XX:NewSize=1024m -XX:MaxNewSize=1024m $HADOOP_NAMENODE_OPTS"

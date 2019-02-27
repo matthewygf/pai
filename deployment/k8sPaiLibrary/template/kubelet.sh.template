@@ -65,7 +65,8 @@ docker run \
   --pod-infra-container-image {{ cluster_cfg['kubernetes']['docker-registry'] }}/pause-amd64:3.0 \
   --image-pull-progress-deadline=10m \
   --docker-root=${DOCKER_ROOT_DIR_FOR_KUBELET} \
-  --system-reserved=memory=3Gi \
+  --kube-reserved=memory=512Mi \
+  --system-reserved=memory=1Gi \
   --eviction-hard="memory.available<5%,nodefs.available<5%,imagefs.available<5%,nodefs.inodesFree<5%,imagefs.inodesFree<5%" \
   --healthz-bind-address="0.0.0.0" \
   --healthz-port="10248" \
