@@ -65,7 +65,7 @@ if [ $(grep 'ip:' /host-configuration/host-configuration.yaml|wc -l) -gt 1 ]
 then
     # i am real poor
     echo "Node role is 'Worker'. Reserve 4G for os and k8s."
-    let mem_reserved=8*1024
+    let mem_reserved=2*1024
 else
     echo "Node role is 'Master & Worker'. Reserve 8G for os and k8s."
     let mem_reserved=8*1024

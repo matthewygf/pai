@@ -28,6 +28,7 @@ from ..common import directory_handler
 from ..common import file_handler
 from ..common import linux_shell
 
+import supported_labels
 
 class service_management_refresh:
 
@@ -69,7 +70,7 @@ class service_management_refresh:
         self.logger.info("Begin to refresh all the nodes' labels")
         machinelist = self.cluster_object_model['machine']['machine-list']
         
-        labels = ['pai-master', 'pai-worker', 'no-driver', 'no-nodeexporter', 'no-jobexporter', 'name-node']
+        labels = supported_labels.LABELS
         logging.info("Currently supported labels: " + str(labels))
         for label in labels:
             self.label_map[label] = list()

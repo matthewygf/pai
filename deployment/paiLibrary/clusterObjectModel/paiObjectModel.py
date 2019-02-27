@@ -207,7 +207,7 @@ class paiObjectModel:
         serviceDict["clusterinfo"]["hadoopinfo"]["custom_hadoop_binary_path"] = \
             serviceDict["clusterinfo"]["hadoopinfo"]["custom-hadoop-binary-path"]
         serviceDict["clusterinfo"]["hadoopinfo"]["configmapname"] = "hadoop-configuration"
-        serviceDict["clusterinfo"]["hadoopinfo"]["hadoop_vip"] = self.getMasterIP()
+        serviceDict["clusterinfo"]["hadoopinfo"]["hadoop_vip"] = self.getIP("name-node")
 
 
         # section : virtualClusters
@@ -269,7 +269,7 @@ class paiObjectModel:
 
         serviceDict["clusterinfo"]["grafanainfo"] = \
             self.rawData["serviceConfiguration"]["grafana"]
-        serviceDict["clusterinfo"]["grafanainfo"]["grafana_url"] = "http://{0}".format(self.getMasterIP())
+        serviceDict["clusterinfo"]["grafanainfo"]["grafana_url"] = "http://{0}".format(self.getIP("grafana"))
         serviceDict["clusterinfo"]["grafanainfo"]["grafana_port"] = \
             serviceDict["clusterinfo"]["grafanainfo"]["grafana-port"]
 
@@ -277,7 +277,7 @@ class paiObjectModel:
 
         serviceDict["clusterinfo"]["prometheusinfo"] = \
             self.rawData["serviceConfiguration"]["prometheus"]
-        serviceDict["clusterinfo"]["prometheusinfo"]["prometheus_url"] = "http://{0}".format(self.getMasterIP())
+        serviceDict["clusterinfo"]["prometheusinfo"]["prometheus_url"] = "http://{0}".format(self.getIP("prometheus"))
         serviceDict["clusterinfo"]["prometheusinfo"]["prometheus_port"] = \
             serviceDict["clusterinfo"]["prometheusinfo"]["prometheus-port"]
         serviceDict["clusterinfo"]["prometheusinfo"]["node_exporter_port"] = \
@@ -399,7 +399,7 @@ class paiObjectModel:
 
     def getGrafanaUri(self):
 
-        vip = self.getMasterIP()
+        vip = self.getIP("grafana")
         port = self.rawData["serviceConfiguration"]["grafana"]["grafana-port"]
         ret = "http://{0}:{1}".format(vip, str(port))
         return ret
@@ -408,7 +408,7 @@ class paiObjectModel:
 
     def getPrometheusUri(self):
 
-        vip = self.getMasterIP()
+        vip = self.getIP("prometheus")
         port = self.rawData["serviceConfiguration"]["prometheus"]["prometheus-port"]
         ret = "http://{0}:{1}".format(vip, str(port))
         return ret
@@ -454,7 +454,7 @@ class paiObjectModel:
 
     def getWebhdfsUri(self):
 
-        vip = self.getMasterIP()
+        vip = self.getIP("name-node")
         port = "5070"
         ret = "http://{0}:{1}".format(vip, str(port))
         return ret
@@ -462,8 +462,8 @@ class paiObjectModel:
 
 
     def getHdfsUri(self):
-
-        vip = self.getMasterIP()
+        
+        vip = self.getIP("name-node")
         port = "9000"
         ret = "hdfs://{0}:{1}".format(vip, str(port))
         return ret
@@ -484,6 +484,14 @@ class paiObjectModel:
 
         return plugins
 
+
+    def getIP(self, tag):
+        for host in self.rawData["clusterConfiguration"]["machine-list"]:
+            if tag in host and host[tag] == "true":
+                return host["hostip"]
+
+        print("not found %s" , tag)
+        sys.exit(1)
 
     def getMasterIP(self):
 

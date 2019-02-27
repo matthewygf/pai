@@ -10,7 +10,7 @@ class Prometheus(object):
 
     def get_master_ip(self):
         for host_conf in self.cluster_conf["machine-list"]:
-            if "pai-master" in host_conf and host_conf["pai-master"] == "true":
+            if "prometheus" in host_conf and host_conf["prometheus"] == "true":
                 return host_conf["hostip"]
 
     def validation_pre(self):
