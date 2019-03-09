@@ -79,7 +79,9 @@ class BuildHandler:
 
         if os.path.isdir(temp_generated_dir):
             shutil.rmtree(temp_generated_dir)
+            self.logger.info("cleaned generated: {0}".format(temp_generated_dir))
 
         if os.path.isdir(temp_dependency_dir):
             shutil.rmtree(temp_dependency_dir)
+            self.logger.info("cleaned dependency: {0}".format(temp_generated_dir))
 
