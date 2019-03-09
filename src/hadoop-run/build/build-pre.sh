@@ -19,6 +19,11 @@
 
 pushd $(dirname "$0") > /dev/null
 
+# HACK:i don't think the above is working for me.
+docker create -ti --name=hadoop-dummy --volume=/hadoop-binary:/hadoop-binary hadoop-build /bin/bash
+docker cp hadoop_dummy:/hadoop-binary /hadoop-binary
+dokcer rm -fv hadoop_dummy
+
 hadoopBinaryPath="/hadoop-binary"
 
 hadoopDestDir="../dependency/"

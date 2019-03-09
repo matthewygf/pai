@@ -52,9 +52,4 @@ docker build -t hadoop-build -f hadoop-ai .
 # keep the volume around.
 docker run --rm --name=hadoop-build --volume=${hadoopBinaryDir}:/hadoop-binary hadoop-build
 
-# HACK:i don't think the above is working for me.
-docker create -ti --name=hadoop-dummy --volume=${hadoopBinaryDir}:/hadoop-binary hadoop-build /bin/bash
-docker cp hadoop_dummy:${hadoopBinaryDir} /hadoop-binary
-dokcer rm -fv hadoop_dummy
-
 popd > /dev/null
