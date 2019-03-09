@@ -49,6 +49,8 @@ touch ${cacheVersion}
 
 docker build -t hadoop-build -f hadoop-ai .
 
-docker run --rm --name=hadoop-build --volume=${hadoopBinaryDir}:/hadoop-binary hadoop-build
+docker run --rm --name=hadoop-build hadoop-build
+
+#docker run --rm --name=hadoop-build --volume=${hadoopBinaryDir}:/hadoop-binary hadoop-build
 
 popd > /dev/null

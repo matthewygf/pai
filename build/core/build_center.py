@@ -113,12 +113,15 @@ class BuildCenter:
         # Start build each component according to topological sequence
         try:
             build_worker = build_handler.BuildHandler(self.docker_cli)
+            self.logger.info("Clean all generated folders if exists")
+            for item in services:
+                build_worker.clean_temp_folder(self.graph.services[item].path)
             self.process_list = self.graph.extract_sub_graph(self.process_list) if self.process_list else services
             for item in services:
                 if item in self.process_list:
                     for inedge in self.graph.services[item].inedges:
                         build_worker.copy_dependency_folder(os.path.join(self.codeDir,inedge),
-                        os.path.join(self.graph.services[item].path,self.dependencyDir+inedge))
+                            os.path.join(self.graph.services[item].path,self.dependencyDir+inedge))
                     build_worker.build_single_component(self.graph.services[item])
             self.logger.info("Build all components succeed")
 
@@ -127,12 +130,12 @@ class BuildCenter:
             self.logger.error("Build all components failed")
             sys.exit(1)
 
-        finally:
-            # Clean generated folder
-            self.logger.info("Begin to clean all temp folder")
-            for item in services:
-                build_worker.clean_temp_folder(self.graph.services[item].path)
-            self.logger.info("Clean all temp folder succeed")
+        # finally:
+        #     # Clean generated folder
+        #     self.logger.info("Begin to clean all temp folder")
+        #     for item in services:
+        #         build_worker.clean_temp_folder(self.graph.services[item].path)
+        #     self.logger.info("Clean all temp folder succeed")
 
 
     def push_center(self):

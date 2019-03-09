@@ -19,7 +19,7 @@
 
 pushd $(dirname "$0") > /dev/null
 
-hadoopBinaryPath="/hadoop-binary/"
+hadoopBinaryPath="/hadoop-binary"
 
 hadoopDestDir="../dependency/"
 
