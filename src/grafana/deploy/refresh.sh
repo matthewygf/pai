@@ -20,7 +20,8 @@
 pushd $(dirname "$0") > /dev/null
 
 echo "refresh grafana-configuration"
-kubectl create configmap grafana-configuration --from-file=grafana-configuration/ --dry-run -o yaml | kubectl apply -f - || exit $?
+#https://github.com/coreos/prometheus-operator/issues/535
+kubectl create configmap grafana-configuration --from-file=grafana-configuration/ --dry-run -o yaml | kubectl replace -f - || exit $?
 
 
 
